@@ -16,7 +16,7 @@ pipeline {
 
     stage('Build') {
       steps {
-          sh 'docker build -f curriculum-front/Dockerfile -t dhineshyd/curriculum-front:latest .'
+        sh 'docker build -f curriculum-front/Dockerfile -t dhineshyd/curriculum-front:latest .'
       }
     }
 
@@ -26,15 +26,18 @@ pipeline {
         DOCKERHUB_PASSWORD = 'Dhinesh@123'
       }
       steps {
-        sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD'
-      }
-    }
-
-    stage('Push') {
-      steps {
-        sh 'docker push dhineshyd/curriculum-front:latest'
-      }
-    }
-
-  }
+        sh '''withCredentials([usernamePassword(credentialsId: \'dockerhub-credentials\', usernameVariable: \'DOCKERHUB_USER\', passwordVariable: \'DOCKERHUB_PASSWORD\')]) {
+    sh \'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD\'
 }
+'''
+        }
+      }
+
+      stage('Push') {
+        steps {
+          sh 'docker push dhineshyd/curriculum-front:latest'
+        }
+      }
+
+    }
+  }
