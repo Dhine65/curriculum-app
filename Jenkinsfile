@@ -17,7 +17,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''
-docker buildx build -f curriculum-front/Dockerfile -t dhineshyd/curriculum-front:latest .'''
+docker buildx build -F curriculum-front/Dockerfile -t dhineshyd/curriculum-front:latest .'''
       }
     }
 
