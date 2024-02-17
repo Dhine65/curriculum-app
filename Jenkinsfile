@@ -36,7 +36,7 @@ pipeline {
 
       stage('Push') {
         steps {
-          sh 'docker push dhineshyd/curriculum-front:latest'
+          sh 'docker push dhineshyd/curriculum-front:latest .'
         }
       }
 
