@@ -16,7 +16,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh '''sudo docker install buildx
+        sh '''
 docker buildx build -f curriculum-front/Dockerfile -t dhineshyd/curriculum-front:latest .'''
       }
     }
